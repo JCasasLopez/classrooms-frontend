@@ -1,3 +1,6 @@
+import { UserAccountStatus } from "./user-account_status.enum";
+import { UserRole } from "./User-role.enum";
+
 export class User {
   idUser: number;
   username: string;
@@ -5,8 +8,8 @@ export class User {
   fullName: string;
   email: string;
   dateOfBirth: Date;
-  roles?: string[];
-  accountStatus?: string;
+  roles?: UserRole[];
+  accountStatus?: UserAccountStatus;
 
   constructor(
     idUser: number,
