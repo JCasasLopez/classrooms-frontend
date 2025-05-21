@@ -30,25 +30,39 @@ export class AuthenticationService {
   }
 
   logout(): void {
-    if(!this.isAuthenticated()){
-      return 
+    if (!this.isAuthenticated()) {
+      this.clearSession();
+      return;
     }
-    
     const refreshToken = this.getRefreshToken();
-
-    const headers = {
-      'Authorization': `Bearer ${refreshToken}`
-    };
-
-    this.http.post('http://localhost:8000/user/logout', null, { headers })
+    const headers = { 'Authorization': `Bearer ${refreshToken}` };
+    this.http.post<StandardResponse<null>>(
+          'http://localhost:8000/user/logout', 
+          null, 
+          { headers })
       .subscribe({
-        next: () => {
-          this.clearSession();
-        },
-        error: () => {
-          this.clearSession(); 
-        }
+        next: () => this.clearSession(),
+
+        // Token inválido: cierra la sesión de todas formas.
+        // Invalid token: logout anyway.
+        error: () => this.clearSession() 
       });
+    }
+
+  refreshSession(): Observable<StandardResponse<LoginResponse>> {
+    const refreshToken = this.getRefreshToken();
+    if (!refreshToken) {
+      return new Observable((observer) => {
+        this.clearSession();
+        observer.error('No refresh token available');
+      });
+    }
+    const headers = { 'Authorization': `Bearer ${refreshToken}` };
+    return this.http.post<StandardResponse<LoginResponse>>(
+      'http://localhost:8000/user/refreshToken',
+      null,
+      { headers }
+    );
   }
 
   setUser(user: User): void {
@@ -59,7 +73,7 @@ export class AuthenticationService {
     return this.user;
   }
 
-  setTokens(accessToken: string, refreshToken: string): void {
+  setTokens(refreshToken: string, accessToken: string): void {
     this.accessToken = accessToken;
     this.refreshToken = refreshToken;
     localStorage.setItem('access_token', accessToken);
