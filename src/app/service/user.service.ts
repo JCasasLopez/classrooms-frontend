@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from '../model/User';
+import { User } from '../model/user';
 import { StandardResponse } from '../model/standard-response';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from './authentication.service';

@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { StandardResponse } from '../model/standard-response';
 import { LoginResponse } from '../model/login-response';
-import { User } from '../model/User';
-import { UserRole } from '../model/User-role.enum';
+import { User } from '../model/user';
+import { UserRole } from '../model/user-role.enum';
 
 @Injectable({
   providedIn: 'root'
