@@ -18,4 +18,8 @@ export class InitialWindowComponent {
     this.router.navigate(["/register"]);
   }
 
+  goToForgotPassword(){
+    this.router.navigate(["/forgotPassword"]);
+  }
+
 }

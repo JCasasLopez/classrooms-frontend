@@ -5,6 +5,6 @@
       <button class="btn primary" (click)="goToLoginWindow()">Log in</button>
       <button class="btn secondary" (click)="goToRegisterWindow()">Register</button>
     </div>
-    <a class="forgot-password" href="#">Forgot password?</a>
+    <a class="forgot-password" href="#" (click)="goToForgotPassword(); $event.preventDefault()">Forgot password?</a>
   </div>
 </div>
