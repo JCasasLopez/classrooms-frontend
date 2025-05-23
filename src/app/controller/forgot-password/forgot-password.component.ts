@@ -1,0 +1,35 @@
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { PasswordService } from '../../service/password.service';
+
+@Component({
+  selector: 'app-forgot-password',
+  templateUrl: './forgot-password.component.html',
+  styleUrl: './forgot-password.component.css'
+})
+export class ForgotPasswordComponent {
+
+  email: string = '';
+
+  constructor(private router: Router,
+      private passwordService: PasswordService) {}
+
+  onSubmit(): void {
+      this.passwordService.forgotPassword(this.email).subscribe({
+          next: (response) => {
+            window.alert("Message: " + response.message + "\nStatus: " + response.status);
+          },
+          error: (response) => {
+            const errorMsg = response.error?.message || 'Unexpected error';
+            const errorStatus = response.error?.status || response.status || '500';
+  
+            window.alert("Message: " + errorMsg + "\nStatus: " + errorStatus);
+          }
+        });
+    }
+
+  cancel(): void {
+    this.router.navigate(['/']); 
+  }
+
+}
