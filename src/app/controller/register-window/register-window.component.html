@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="card">
+    <h2>Create Account</h2>
+
+    <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+      <div class="input-group">
+        <input
+          type="text"
+          name="username"
+          class="custom-input"
+          [(ngModel)]="username"
+          placeholder="Username"
+          required
+        />
+        <small class="hint">6–20 characters</small>
+      </div>
+
+      <div class="input-group">
+        <input
+          type="text"
+          name="fullName"
+          class="custom-input"
+          [(ngModel)]="fullName"
+          placeholder="Full Name"
+          required
+        />
+        <small class="hint">Max. 30 characters</small>
+      </div>
+
+      <div class="input-group">
+        <input
+          type="email"
+          name="email"
+          class="custom-input"
+          [(ngModel)]="email"
+          placeholder="Email"
+          required
+        />
+      </div>
+
+      <div class="input-group">
+        <div class="password-wrapper">
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            name="password"
+            class="custom-input"
+            [(ngModel)]="password"
+            placeholder="Password"
+            required
+          />
+          <button type="button" class="toggle" (click)="togglePasswordVisibility()">
+            {{ showPassword ? 'Hide' : 'Show' }}
+          </button>
+        </div>
+        <small class="hint">Min. 8 chars, 1 uppercase, 1 lowercase, 1 number, 1 symbol</small>
+      </div>
+
+      <div class="input-group">
+        <input
+          type="date"
+          name="dateOfBirth"
+          class="custom-input"
+          [(ngModel)]="dateOfBirth"
+          placeholder="Date of Birth"
+          required
+        />
+      </div>
+
+      <div class="button-group">
+        <button class="btn primary" type="submit">Register</button>
+        <button class="btn secondary" type="button" (click)="cancel()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
