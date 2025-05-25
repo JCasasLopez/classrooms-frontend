@@ -24,6 +24,7 @@ export class PasswordService {
       });
       return this.http.put<StandardResponse<null>>(
         `http://localhost:8000/user/resetPassword`,
+        newPassword,
         { headers }
       );
     }
