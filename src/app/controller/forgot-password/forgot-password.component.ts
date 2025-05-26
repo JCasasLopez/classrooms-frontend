@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { PasswordService } from '../../service/password.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-forgot-password',
@@ -11,19 +12,20 @@ export class ForgotPasswordComponent {
 
   email: string = '';
 
-  constructor(private router: Router,
-      private passwordService: PasswordService) {}
+  constructor(
+      private router: Router,
+      private passwordService: PasswordService,
+      private toastr: ToastrService) {}
 
   onSubmit(): void {
       this.passwordService.forgotPassword(this.email).subscribe({
           next: (response) => {
-            window.alert("Message: " + response.message + "\nStatus: " + response.status);
+            this.toastr.success(`Message: ${response.message}`, `Status: ${response.status}`);
           },
           error: (response) => {
             const errorMsg = response.error?.message || 'Unexpected error';
             const errorStatus = response.error?.status || response.status || '500';
-  
-            window.alert("Message: " + errorMsg + "\nStatus: " + errorStatus);
+            this.toastr.error(`Message: ${errorMsg}`, `Status: ${errorStatus}`);
           }
         });
     }

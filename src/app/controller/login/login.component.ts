@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthenticationService } from '../../service/authentication.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,9 @@ export class LoginComponent {
   password: string = '';
   showPassword: boolean = false;
 
-  constructor(private authenticationService: AuthenticationService, private router: Router) {}
+  constructor(private authenticationService: AuthenticationService, 
+    private router: Router,
+    private toastr: ToastrService) {}
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
@@ -26,17 +29,16 @@ export class LoginComponent {
   login(username: string, password: string): void {
   this.authenticationService.login(username, password).subscribe({
     next: (response) => {
-      window.alert("Message: " + response.message + "\nStatus: " + response.status);
+      this.toastr.success(`Message: ${response.message}`, `Status: ${response.status}`);
       this.authenticationService.setUser(response.details.user);
       this.authenticationService.setTokens(response.details.refreshToken, response.details.accessToken);
       console.log(response.details.user);
       this.router.navigate(["/"]);
     },
     error: (response) => {
-      window.alert(
-        "Message: " + (response.error?.message || "Unknown error") +
-        "\nStatus: " + (response.error?.status || response.status || "500")
-      );
+      const errorMsg = response.error?.message || 'Unexpected error';
+      const errorStatus = response.error?.status || response.status || 500;
+      this.toastr.error(`Message: ${errorMsg}`, `Status: ${errorStatus}`);
     }
   });
 }

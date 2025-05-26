@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../service/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register-verification',
@@ -14,7 +15,8 @@ export class RegisterVerificationComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -23,14 +25,14 @@ export class RegisterVerificationComponent implements OnInit {
     if (token) {
       this.userService.createAccount(token).subscribe({
         next: (response) => {
-          window.alert("Message: " + response.message + "\nStatus: " + response.status);
+          this.toastr.success(`Message: ${response.message}`, `Status: ${response.status}`);
           setTimeout(() => this.router.navigate(['/']), 1000);
         },
         error: (response) => {
           const errorMsg = response.error?.message || 'Unexpected error';
           const errorStatus = response.error?.status || response.status || '500';
 
-          window.alert("Message: " + errorMsg + "\nStatus: " + errorStatus);
+          this.toastr.error(`Message: ${errorMsg}`, `Status: ${errorStatus}`);
           setTimeout(() => this.router.navigate(['/register']), 1000);
         }
       });

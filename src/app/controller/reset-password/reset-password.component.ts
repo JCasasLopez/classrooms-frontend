@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PasswordService } from '../../service/password.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-reset-password',
@@ -16,7 +17,8 @@ export class ResetPasswordComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private passwordService: PasswordService
+    private passwordService: PasswordService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -30,13 +32,13 @@ export class ResetPasswordComponent implements OnInit {
   onResetPassword(): void {
     this.passwordService.resetPassword(this.token, this.newPassword).subscribe({
       next: (response) => {
-        window.alert("Message: " + response.message + "\nStatus: " + response.status);
+        this.toastr.success(`Message: ${response.message}`, `Status: ${response.status}`);
         this.router.navigate(['/login']);
       },
       error: (response) => {
         const errorMsg = response.error?.message || 'Unexpected error';
         const errorStatus = response.error?.status || response.status || '500';
-        window.alert("Message: " + errorMsg + "\nStatus: " + errorStatus);
+        this.toastr.error(`Message: ${errorMsg}`, `Status: ${errorStatus}`);
       }
     });
   }
