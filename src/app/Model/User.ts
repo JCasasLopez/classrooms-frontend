@@ -1,3 +1,4 @@
+import { Role } from "./role";
 import { UserAccountStatus } from "./user-account_status.enum";
 import { UserRole } from "./user-role.enum";
 
@@ -8,7 +9,7 @@ export class User {
   fullName: string;
   email: string;
   dateOfBirth: Date;
-  roles?: UserRole[];
+  roles?: Role[];
   accountStatus?: UserAccountStatus;
 
   constructor(params: {
