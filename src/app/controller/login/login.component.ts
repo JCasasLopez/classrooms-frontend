@@ -33,7 +33,8 @@ export class LoginComponent {
       this.authenticationService.setUser(response.details.user);
       this.authenticationService.setTokens(response.details.refreshToken, response.details.accessToken);
       console.log(response.details.user);
-      this.router.navigate(["/"]);
+      console.log(this.authenticationService.getUser());
+      this.router.navigate(["/main"]);
     },
     error: (response) => {
       const errorMsg = response.error?.message || 'Unexpected error';
