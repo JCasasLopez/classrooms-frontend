@@ -43,7 +43,6 @@ export class AuthenticationService {
       .subscribe({
         next: () => this.clearSession(),
 
-        // Token inválido: cierra la sesión de todas formas.
         // Invalid token: logout anyway.
         error: () => this.clearSession() 
       });
@@ -107,12 +106,12 @@ export class AuthenticationService {
   }
 
   getUserRoles(): UserRole[] {
-  return this.user?.roles ?? [];
+    return this.user?.roles?.map(r => r.roleName) ?? [];
   }
 
   isAdmin(): boolean {
-  const roles = this.getUserRoles();
-  return roles.includes(UserRole.ADMIN_USER) || roles.includes(UserRole.SUPERADMIN_USER);
+    const roles = this.getUserRoles();
+    return roles.includes(UserRole.ROLE_ADMIN) || roles.includes(UserRole.ROLE_SUPERADMIN);
   }
 
 }
