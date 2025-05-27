@@ -1,0 +1,37 @@
+<header class="navbar">
+  <!-- Left: Logo -->
+  <div class="navbar-left">
+    <span class="logo">ClassroomsApp</span>
+  </div>
+
+  <!-- Right: Manage Account dropdown + Logout -->
+  <div class="navbar-right">
+    <div class="menu-dropdown">
+      <button class="menu-button">Manage Account ▼</button>
+
+      <ul class="dropdown-content">
+        <!-- Always visible -->
+        <li>
+          <a routerLink="manage-account/delete" routerLinkActive="active">Delete Account</a>
+        </li>
+        <li>
+          <a routerLink="manage-account/change-password" routerLinkActive="active">Change Password</a>
+        </li>
+
+        <!-- Only visible if user is admin -->
+        <li *ngIf="isAdmin">
+          <a routerLink="manage-account/upgrade" routerLinkActive="active">Upgrade User</a>
+        </li>
+        <li *ngIf="isAdmin">
+          <a routerLink="manage-account/update-status" routerLinkActive="active">Update Account Status</a>
+        </li>
+      </ul>
+    </div>
+
+    <button class="logout-button" (click)="onLogout()">Logout</button>
+  </div>
+</header>
+
+<main class="content-area">
+  <router-outlet></router-outlet>
+</main>
