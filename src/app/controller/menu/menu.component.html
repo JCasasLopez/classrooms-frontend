@@ -7,20 +7,20 @@
   <!-- Right: Manage Account dropdown + Logout -->
   <div class="navbar-right">
     <div class="menu-dropdown">
-      <button class="menu-button">Manage Account ▼</button>
+      <button class="menu-button" (click)="toggleDropdown()">Manage Account ▼</button>
 
       <ul class="dropdown-content">
-        <!-- Always visible -->
+        <!-- Delete Account with confirmation -->
         <li>
-          <a routerLink="manage-account/delete" routerLinkActive="active">Delete Account</a>
+          <a (click)="confirmDeleteAccount()" style="cursor: pointer;">Delete Account</a>
         </li>
         <li>
-          <a routerLink="manage-account/change-password" routerLinkActive="active">Change Password</a>
+          <a routerLink="/change-password" routerLinkActive="active">Change Password</a>
         </li>
 
         <!-- Only visible if user is admin -->
         <li *ngIf="isAdmin">
-          <a routerLink="manage-account/upgrade" routerLinkActive="active">Upgrade User</a>
+          <a routerLink="/upgrade-user" routerLinkActive="active">Upgrade User</a>
         </li>
         <li *ngIf="isAdmin">
           <a routerLink="manage-account/update-status" routerLinkActive="active">Update Account Status</a>
