@@ -53,7 +53,7 @@ export class UserService {
       );
     }
 
-    updateAccountStatus(accessToken:string, email:string, newAccountStatus:UserAccountStatus){
+    updateAccountStatus(accessToken:string, email:string, newAccountStatus:string){
       const headers = new HttpHeaders({
         'Authorization': `Bearer ${accessToken}`
       });
