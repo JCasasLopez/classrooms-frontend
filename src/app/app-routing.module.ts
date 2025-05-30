@@ -13,7 +13,6 @@ import { ResetPasswordComponent } from './controller/reset-password/reset-passwo
 import { MenuComponent } from './controller/menu/menu.component';
 
 // Components shown within the "Manage Account" section
-import { DeleteAccountComponent } from './controller/manage-account/delete-account/delete-account.component';
 import { ChangePasswordComponent } from './controller/manage-account/change-password/change-password.component';
 import { UpgradeUserComponent } from './controller/manage-account/upgrade-user/upgrade-user.component';
 import { UpdateStatusComponent } from './controller/manage-account/update-status/update-status.component';
@@ -27,16 +26,16 @@ const routes: Routes = [
   { path: 'forgotPassword', component: ForgotPasswordComponent },
   { path: 'resetPassword', component: ResetPasswordComponent },
 
-  // Protected area after login
+  // Standalone manage-account routes (no menu)
+  { path: 'change-password', component: ChangePasswordComponent },
+  { path: 'upgrade-user', component: UpgradeUserComponent },
+  { path: 'update-status', component: UpdateStatusComponent },
+
   {
     path: 'main',
     component: MenuComponent,
     children: [
-      { path: 'manage-account/delete', component: DeleteAccountComponent },
-      { path: 'manage-account/change-password', component: ChangePasswordComponent },
-      { path: 'manage-account/upgrade', component: UpgradeUserComponent },
-      { path: 'manage-account/update-status', component: UpdateStatusComponent },
-      { path: '', redirectTo: 'manage-account/delete', pathMatch: 'full' } // default child route
+      
     ]
   }
 ];

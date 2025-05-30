@@ -5,7 +5,6 @@ import { AppComponent } from './app/app.component';
 import { InitialWindowComponent } from './controller/initial-window/initial-window.component';
 import { LoginComponent } from './controller/login/login.component';
 import { FormsModule } from '@angular/forms';
-import { provideHttpClient } from '@angular/common/http';
 import { RegisterWindowComponent } from './controller/register-window/register-window.component';
 import { RegisterVerificationComponent } from './controller/register-verification/register-verification.component';
 import { ForgotPasswordComponent } from './controller/forgot-password/forgot-password.component';
@@ -13,10 +12,11 @@ import { ResetPasswordComponent } from './controller/reset-password/reset-passwo
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { MenuComponent } from './controller/menu/menu.component';
-import { DeleteAccountComponent } from './controller/manage-account/delete-account/delete-account.component';
 import { ChangePasswordComponent } from './controller/manage-account/change-password/change-password.component';
 import { UpgradeUserComponent } from './controller/manage-account/upgrade-user/upgrade-user.component';
 import { UpdateStatusComponent } from './controller/manage-account/update-status/update-status.component';
+import { RouterModule } from '@angular/router';
+import { HttpClient, provideHttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,14 +28,14 @@ import { UpdateStatusComponent } from './controller/manage-account/update-status
     ForgotPasswordComponent,
     ResetPasswordComponent,
     MenuComponent,
-    DeleteAccountComponent,
     ChangePasswordComponent,
     UpgradeUserComponent,
-    UpdateStatusComponent
+    UpdateStatusComponent,
   ],
-  
+
   imports: [
     BrowserModule,
+    RouterModule,
     FormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
