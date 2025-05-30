@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="card">
+    <h2>Update account status</h2>
+    <div class="input-group">
+      <!-- Email input -->
+      <input
+        type="email"
+        placeholder="Enter user's email"
+        [(ngModel)]="email"
+        required
+      />
+
+      <!-- Label for dropdown -->
+      <label for="accountStatus" style="text-align: left;">Update account to:</label>
+
+      <!-- Dropdown menu -->
+      <select [(ngModel)]="newAccountStatus">
+        <option [ngValue]="'ACTIVE'">Active</option>
+        <option [ngValue]="'BLOCKED'">Blocked</option>
+        <option [ngValue]="'PERMANENTLY_SUSPENDED'">Permanently suspended</option>
+      </select>
+    </div>
+
+    <div class="button-group">
+      <button class="btn primary" (click)="updateStatus()">Update</button>
+      <button class="btn secondary" (click)="cancel()">Cancel</button>
+    </div>
+  </div>
+</div>
