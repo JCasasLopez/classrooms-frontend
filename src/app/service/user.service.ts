@@ -4,7 +4,7 @@ import { User } from '../model/user';
 import { StandardResponse } from '../model/standard-response';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from './authentication.service';
-import { UserAccountStatus } from '../model/user-account_status.enum';
+import { AccountStatus } from '../model/account-status.enum';
 
 @Injectable({
   providedIn: 'root'
